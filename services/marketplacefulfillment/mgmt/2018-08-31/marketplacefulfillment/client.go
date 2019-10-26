@@ -32,24 +32,18 @@ DefaultBaseURI = "https://marketplaceapi.microsoft.com/api/saas/subscriptions")
 type BaseClient struct {
     autorest.Client
     BaseURI string
-            XMsMarketplaceToken string
-            XMsRequestid string
-            XMsCorrelationid string
 }
 
 // New creates an instance of the BaseClient client.
-func New(xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string)BaseClient {
-    return NewWithBaseURI(DefaultBaseURI, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid)
+func New()BaseClient {
+    return NewWithBaseURI(DefaultBaseURI, )
 }
 
 // NewWithBaseURI creates an instance of the BaseClient client.
-func NewWithBaseURI(baseURI string, xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) BaseClient {
+func NewWithBaseURI(baseURI string, ) BaseClient {
     return BaseClient{
         Client: autorest.NewClientWithUserAgent(UserAgent()),
         BaseURI: baseURI,
-                XMsMarketplaceToken: xMsMarketplaceToken,
-                XMsRequestid: xMsRequestid,
-                XMsCorrelationid: xMsCorrelationid,
     }
 }
 

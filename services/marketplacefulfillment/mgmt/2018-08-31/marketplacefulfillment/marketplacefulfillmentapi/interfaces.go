@@ -24,7 +24,7 @@ import (
 
         // ClientAPI contains the set of methods on the Client type.
         type ClientAPI interface {
-            Resolve(ctx context.Context) (result marketplacefulfillment.Subscription, err error)
+            Resolve(ctx context.Context, xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) (result marketplacefulfillment.Subscription, err error)
         }
 
         var _ ClientAPI = (*marketplacefulfillment.Client)(nil)

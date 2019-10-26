@@ -30,17 +30,26 @@ type Client struct {
     BaseClient
 }
 // NewClient creates an instance of the Client client.
-func NewClient(xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) Client {
-    return NewClientWithBaseURI(DefaultBaseURI, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid)
+func NewClient() Client {
+    return NewClientWithBaseURI(DefaultBaseURI, )
 }
 
 // NewClientWithBaseURI creates an instance of the Client client.
-    func NewClientWithBaseURI(baseURI string, xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) Client {
-        return Client{ NewWithBaseURI(baseURI, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid)}
+    func NewClientWithBaseURI(baseURI string, ) Client {
+        return Client{ NewWithBaseURI(baseURI, )}
     }
 
 // Resolve resolve marketplace subscription.
-func (client Client) Resolve(ctx context.Context) (result Subscription, err error) {
+    // Parameters:
+        // xMsMarketplaceToken - the token query parameter in the URL when the user is redirected to the SaaS partner’s
+        // website from Azure (for example: https://contoso.com/signup?token=..). Note: The URL decodes the token value
+        // from the browser before using it.
+        // xMsRequestid - a unique string value for tracking the request from the client, preferably a GUID. If this
+        // value isn't provided, one will be generated and provided in the response headers.
+        // xMsCorrelationid - a unique string value for operation on the client. This parameter correlates all events
+        // from client operation with events on the server side. If this value isn't provided, one will be generated
+        // and provided in the response headers.
+func (client Client) Resolve(ctx context.Context, xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) (result Subscription, err error) {
     if tracing.IsEnabled() {
         ctx = tracing.StartSpan(ctx, fqdn + "/Client.Resolve")
         defer func() {
@@ -51,7 +60,7 @@ func (client Client) Resolve(ctx context.Context) (result Subscription, err erro
             tracing.EndSpan(ctx, sc, err)
         }()
     }
-        req, err := client.ResolvePreparer(ctx)
+        req, err := client.ResolvePreparer(ctx, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid)
     if err != nil {
     err = autorest.NewErrorWithError(err, "marketplacefulfillment.Client", "Resolve", nil , "Failure preparing request")
     return
@@ -73,7 +82,7 @@ func (client Client) Resolve(ctx context.Context) (result Subscription, err erro
     }
 
     // ResolvePreparer prepares the Resolve request.
-    func (client Client) ResolvePreparer(ctx context.Context) (*http.Request, error) {
+    func (client Client) ResolvePreparer(ctx context.Context, xMsMarketplaceToken string, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
                     const APIVersion = "2018-08-31"
         queryParameters := map[string]interface{} {
         "api-version": APIVersion,
@@ -84,14 +93,14 @@ func (client Client) Resolve(ctx context.Context) (result Subscription, err erro
     autorest.WithBaseURL(client.BaseURI),
     autorest.WithPath("/resolve"),
     autorest.WithQueryParameters(queryParameters),
-    autorest.WithHeader("x-ms-marketplace-token", client.XMsMarketplaceToken))
-            if len(client.XMsRequestid) > 0 {
+    autorest.WithHeader("x-ms-marketplace-token", autorest.String(xMsMarketplaceToken)))
+            if len(xMsRequestid) > 0 {
             preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-requestid",autorest.String(client.XMsRequestid)))
+            autorest.WithHeader("x-ms-requestid",autorest.String(xMsRequestid)))
             }
-            if len(client.XMsCorrelationid) > 0 {
+            if len(xMsCorrelationid) > 0 {
             preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-correlationid",autorest.String(client.XMsCorrelationid)))
+            autorest.WithHeader("x-ms-correlationid",autorest.String(xMsCorrelationid)))
             }
     return preparer.Prepare((&http.Request{}).WithContext(ctx))
     }
