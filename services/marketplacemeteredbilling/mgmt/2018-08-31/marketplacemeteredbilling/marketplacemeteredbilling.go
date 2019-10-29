@@ -30,13 +30,13 @@ type Client struct {
     BaseClient
 }
 // NewClient creates an instance of the Client client.
-func NewClient(authorization string, xMsRequestid string, xMsCorrelationid string) Client {
-    return NewClientWithBaseURI(DefaultBaseURI, authorization, xMsRequestid, xMsCorrelationid)
+func NewClient() Client {
+    return NewClientWithBaseURI(DefaultBaseURI, )
 }
 
 // NewClientWithBaseURI creates an instance of the Client client.
-    func NewClientWithBaseURI(baseURI string, authorization string, xMsRequestid string, xMsCorrelationid string) Client {
-        return Client{ NewWithBaseURI(baseURI, authorization, xMsRequestid, xMsCorrelationid)}
+    func NewClientWithBaseURI(baseURI string, ) Client {
+        return Client{ NewWithBaseURI(baseURI, )}
     }
 
 // BatchUsageEventMethod report batch usage events.
@@ -76,27 +76,16 @@ func (client Client) BatchUsageEventMethod(ctx context.Context, parameters Batch
 
     // BatchUsageEventMethodPreparer prepares the BatchUsageEventMethod request.
     func (client Client) BatchUsageEventMethodPreparer(ctx context.Context, parameters BatchUsageEvent) (*http.Request, error) {
-                    const APIVersion = "2018-08-31"
-        queryParameters := map[string]interface{} {
-        "api-version": APIVersion,
-        }
+            pathParameters := map[string]interface{} {
+            "api-version": APIVersion,
+            }
 
         preparer := autorest.CreatePreparer(
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/batchUsageEvent"),
-    autorest.WithJSON(parameters),
-    autorest.WithQueryParameters(queryParameters),
-    autorest.WithHeader("authorization", client.Authorization))
-            if len(client.XMsRequestid) > 0 {
-            preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-requestid",autorest.String(client.XMsRequestid)))
-            }
-            if len(client.XMsCorrelationid) > 0 {
-            preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-correlationid",autorest.String(client.XMsCorrelationid)))
-            }
+    autorest.WithPathParameters("/batchUsageEvent/{api-version}",pathParameters),
+    autorest.WithJSON(parameters))
     return preparer.Prepare((&http.Request{}).WithContext(ctx))
     }
 
@@ -122,7 +111,12 @@ func (client Client) BatchUsageEventMethodResponder(resp *http.Response) (result
 // UsageEventMethod report single usage event.
     // Parameters:
         // parameters - parameters supplied to report a single usage event.
-func (client Client) UsageEventMethod(ctx context.Context, parameters UsageEvent) (result autorest.Response, err error) {
+        // xMsRequestid - a unique string value for tracking the request from the client, preferably a GUID. If this
+        // value isn't provided, one will be generated and provided in the response headers.
+        // xMsCorrelationid - a unique string value for operation on the client. This parameter correlates all events
+        // from client operation with events on the server side. If this value isn't provided, one will be generated
+        // and provided in the response headers.
+func (client Client) UsageEventMethod(ctx context.Context, parameters UsageEvent, xMsRequestid string, xMsCorrelationid string) (result autorest.Response, err error) {
     if tracing.IsEnabled() {
         ctx = tracing.StartSpan(ctx, fqdn + "/Client.UsageEventMethod")
         defer func() {
@@ -133,7 +127,7 @@ func (client Client) UsageEventMethod(ctx context.Context, parameters UsageEvent
             tracing.EndSpan(ctx, sc, err)
         }()
     }
-        req, err := client.UsageEventMethodPreparer(ctx, parameters)
+        req, err := client.UsageEventMethodPreparer(ctx, parameters, xMsRequestid, xMsCorrelationid)
     if err != nil {
     err = autorest.NewErrorWithError(err, "marketplacemeteredbilling.Client", "UsageEventMethod", nil , "Failure preparing request")
     return
@@ -155,27 +149,24 @@ func (client Client) UsageEventMethod(ctx context.Context, parameters UsageEvent
     }
 
     // UsageEventMethodPreparer prepares the UsageEventMethod request.
-    func (client Client) UsageEventMethodPreparer(ctx context.Context, parameters UsageEvent) (*http.Request, error) {
-                    const APIVersion = "2018-08-31"
-        queryParameters := map[string]interface{} {
-        "api-version": APIVersion,
-        }
+    func (client Client) UsageEventMethodPreparer(ctx context.Context, parameters UsageEvent, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
+            pathParameters := map[string]interface{} {
+            "api-version": APIVersion,
+            }
 
         preparer := autorest.CreatePreparer(
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/usageEvent"),
-    autorest.WithJSON(parameters),
-    autorest.WithQueryParameters(queryParameters),
-    autorest.WithHeader("authorization", client.Authorization))
-            if len(client.XMsRequestid) > 0 {
+    autorest.WithPathParameters("/usageEvent/{api-version}",pathParameters),
+    autorest.WithJSON(parameters))
+            if len(xMsRequestid) > 0 {
             preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-requestid",autorest.String(client.XMsRequestid)))
+            autorest.WithHeader("x-ms-requestid",autorest.String(xMsRequestid)))
             }
-            if len(client.XMsCorrelationid) > 0 {
+            if len(xMsCorrelationid) > 0 {
             preparer = autorest.DecoratePreparer(preparer,
-            autorest.WithHeader("x-ms-correlationid",autorest.String(client.XMsCorrelationid)))
+            autorest.WithHeader("x-ms-correlationid",autorest.String(xMsCorrelationid)))
             }
     return preparer.Prepare((&http.Request{}).WithContext(ctx))
     }
