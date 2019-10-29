@@ -76,16 +76,18 @@ func (client Client) BatchUsageEventMethod(ctx context.Context, parameters Batch
 
     // BatchUsageEventMethodPreparer prepares the BatchUsageEventMethod request.
     func (client Client) BatchUsageEventMethodPreparer(ctx context.Context, parameters BatchUsageEvent) (*http.Request, error) {
-            pathParameters := map[string]interface{} {
-            "api-version": APIVersion,
-            }
+                    const APIVersion = "2018-08-31"
+        queryParameters := map[string]interface{} {
+        "api-version": APIVersion,
+        }
 
         preparer := autorest.CreatePreparer(
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPathParameters("/batchUsageEvent/{api-version}",pathParameters),
-    autorest.WithJSON(parameters))
+    autorest.WithPath("/batchUsageEvent"),
+    autorest.WithJSON(parameters),
+    autorest.WithQueryParameters(queryParameters))
     return preparer.Prepare((&http.Request{}).WithContext(ctx))
     }
 
@@ -150,16 +152,18 @@ func (client Client) UsageEventMethod(ctx context.Context, parameters UsageEvent
 
     // UsageEventMethodPreparer prepares the UsageEventMethod request.
     func (client Client) UsageEventMethodPreparer(ctx context.Context, parameters UsageEvent, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
-            pathParameters := map[string]interface{} {
-            "api-version": APIVersion,
-            }
+                    const APIVersion = "2018-08-31"
+        queryParameters := map[string]interface{} {
+        "api-version": APIVersion,
+        }
 
         preparer := autorest.CreatePreparer(
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPathParameters("/usageEvent/{api-version}",pathParameters),
-    autorest.WithJSON(parameters))
+    autorest.WithPath("/usageEvent"),
+    autorest.WithJSON(parameters),
+    autorest.WithQueryParameters(queryParameters))
             if len(xMsRequestid) > 0 {
             preparer = autorest.DecoratePreparer(preparer,
             autorest.WithHeader("x-ms-requestid",autorest.String(xMsRequestid)))
