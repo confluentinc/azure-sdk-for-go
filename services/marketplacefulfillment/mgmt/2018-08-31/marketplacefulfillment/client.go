@@ -32,18 +32,20 @@ DefaultBaseURI = "https://marketplaceapi.microsoft.com/api/saas/subscriptions")
 type BaseClient struct {
     autorest.Client
     BaseURI string
+            Authorization string
 }
 
 // New creates an instance of the BaseClient client.
-func New()BaseClient {
-    return NewWithBaseURI(DefaultBaseURI, )
+func New(authorization string)BaseClient {
+    return NewWithBaseURI(DefaultBaseURI, authorization)
 }
 
 // NewWithBaseURI creates an instance of the BaseClient client.
-func NewWithBaseURI(baseURI string, ) BaseClient {
+func NewWithBaseURI(baseURI string, authorization string) BaseClient {
     return BaseClient{
         Client: autorest.NewClientWithUserAgent(UserAgent()),
         BaseURI: baseURI,
+                Authorization: authorization,
     }
 }
 
