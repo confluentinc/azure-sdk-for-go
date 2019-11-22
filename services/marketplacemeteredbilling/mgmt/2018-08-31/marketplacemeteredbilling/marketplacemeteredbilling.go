@@ -43,7 +43,7 @@ func NewClient() Client {
     // Parameters:
         // authorization - bearer token for authorization.
         // parameters - parameters supplied to report batch usage events.
-func (client Client) BatchUsageEvent(ctx context.Context, authorization string, parameters BatchUsageEventRequest) (result SetObject, err error) {
+func (client Client) BatchUsageEvent(ctx context.Context, authorization string, parameters BatchUsageEventRequest) (result BatchUsageEventResponse, err error) {
     if tracing.IsEnabled() {
         ctx = tracing.StartSpan(ctx, fqdn + "/Client.BatchUsageEvent")
         defer func() {
@@ -102,12 +102,12 @@ func (client Client) BatchUsageEvent(ctx context.Context, authorization string, 
 
 // BatchUsageEventResponder handles the response to the BatchUsageEvent request. The method always
 // closes the http.Response Body.
-func (client Client) BatchUsageEventResponder(resp *http.Response) (result SetObject, err error) {
+func (client Client) BatchUsageEventResponder(resp *http.Response) (result BatchUsageEventResponse, err error) {
     err = autorest.Respond(
     resp,
     client.ByInspecting(),
-    azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusForbidden),
-    autorest.ByUnmarshallingJSON(&result.Value),
+    azure.WithErrorUnlessStatusCode(http.StatusOK),
+    autorest.ByUnmarshallingJSON(&result),
     autorest.ByClosing())
     result.Response = autorest.Response{Response: resp}
         return

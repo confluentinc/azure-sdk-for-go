@@ -55,6 +55,7 @@ const fqdn = "github.com/Azure/azure-sdk-for-go/services/marketplacemeteredbilli
 
             // BatchUsageEventResponse the batchUsageEventResponse definition
             type BatchUsageEventResponse struct {
+            autorest.Response `json:"-"`
             // Result - List of result objects
             Result *[]ResultProperties `json:"result,omitempty"`
             // Count - Count of result objects
