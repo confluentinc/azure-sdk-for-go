@@ -72,12 +72,12 @@ const fqdn = "github.com/Azure/azure-sdk-for-go/services/marketplacemeteredbilli
 
             // DetailsProperties detailsProperties definition
             type DetailsProperties struct {
-            // Message - Status of the result.
+            // Message - Error Message.
             Message *string `json:"message,omitempty"`
-            // Target - Time when the message was sent.
+            // Target - API request target.
             Target *string `json:"target,omitempty"`
-            // Code - Quantity of the metric that was reported.
-            Code *float64 `json:"code,omitempty"`
+            // Code - Error code enum.
+            Code *string `json:"code,omitempty"`
             }
 
             // ErrorProperties errorProperties definition
