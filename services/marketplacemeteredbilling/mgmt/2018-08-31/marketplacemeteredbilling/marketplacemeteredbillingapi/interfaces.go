@@ -24,7 +24,7 @@ import (
 
         // ClientAPI contains the set of methods on the Client type.
         type ClientAPI interface {
-            BatchUsageEvent(ctx context.Context, authorization string, xMsRequestid string, parameters marketplacemeteredbilling.BatchUsageEventRequest) (result marketplacemeteredbilling.BatchUsageEventResponse, err error)
+            BatchUsageEvent(ctx context.Context, authorization string, xMsRequestid string, parameters marketplacemeteredbilling.BatchUsageEventRequest, xMsCorrelationid string) (result marketplacemeteredbilling.BatchUsageEventResponse, err error)
             UsageEvent(ctx context.Context, authorization string, parameters marketplacemeteredbilling.UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result marketplacemeteredbilling.SetObject, err error)
         }
 
