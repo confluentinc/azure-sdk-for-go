@@ -42,8 +42,10 @@ func NewClient() Client {
 // BatchUsageEvent report batch usage events.
     // Parameters:
         // authorization - bearer token for authorization.
+        // xMsRequestid - a unique string value for tracking the request from the client, preferably a GUID. If this
+        // value isn't provided, one will be generated and provided in the response headers.
         // parameters - parameters supplied to report batch usage events.
-func (client Client) BatchUsageEvent(ctx context.Context, authorization string, parameters BatchUsageEventRequest) (result BatchUsageEventResponse, err error) {
+func (client Client) BatchUsageEvent(ctx context.Context, authorization string, xMsRequestid string, parameters BatchUsageEventRequest) (result BatchUsageEventResponse, err error) {
     if tracing.IsEnabled() {
         ctx = tracing.StartSpan(ctx, fqdn + "/Client.BatchUsageEvent")
         defer func() {
@@ -54,7 +56,7 @@ func (client Client) BatchUsageEvent(ctx context.Context, authorization string, 
             tracing.EndSpan(ctx, sc, err)
         }()
     }
-        req, err := client.BatchUsageEventPreparer(ctx, authorization, parameters)
+        req, err := client.BatchUsageEventPreparer(ctx, authorization, xMsRequestid, parameters)
     if err != nil {
     err = autorest.NewErrorWithError(err, "marketplacemeteredbilling.Client", "BatchUsageEvent", nil , "Failure preparing request")
     return
@@ -76,7 +78,7 @@ func (client Client) BatchUsageEvent(ctx context.Context, authorization string, 
     }
 
     // BatchUsageEventPreparer prepares the BatchUsageEvent request.
-    func (client Client) BatchUsageEventPreparer(ctx context.Context, authorization string, parameters BatchUsageEventRequest) (*http.Request, error) {
+    func (client Client) BatchUsageEventPreparer(ctx context.Context, authorization string, xMsRequestid string, parameters BatchUsageEventRequest) (*http.Request, error) {
                     const APIVersion = "2018-08-31"
         queryParameters := map[string]interface{} {
         "api-version": APIVersion,
@@ -89,7 +91,8 @@ func (client Client) BatchUsageEvent(ctx context.Context, authorization string, 
     autorest.WithPath("/batchUsageEvent"),
     autorest.WithJSON(parameters),
     autorest.WithQueryParameters(queryParameters),
-    autorest.WithHeader("authorization", autorest.String(authorization)))
+    autorest.WithHeader("authorization", autorest.String(authorization)),
+    autorest.WithHeader("x-ms-requestid", autorest.String(xMsRequestid)))
     return preparer.Prepare((&http.Request{}).WithContext(ctx))
     }
 
