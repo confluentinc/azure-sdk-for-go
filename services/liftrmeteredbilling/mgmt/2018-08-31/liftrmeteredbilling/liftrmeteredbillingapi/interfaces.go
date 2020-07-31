@@ -22,10 +22,10 @@ import (
     "github.com/Azure/azure-sdk-for-go/services/liftrmeteredbilling/mgmt/2018-08-31/liftrmeteredbilling"
 )
 
-        // LiftrMarketplaceBillingClientAPI contains the set of methods on the LiftrMarketplaceBillingClient type.
-        type LiftrMarketplaceBillingClientAPI interface {
+        // ClientAPI contains the set of methods on the Client type.
+        type ClientAPI interface {
             BatchUsageEvent(ctx context.Context, authorization string, parameters liftrmeteredbilling.BatchUsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result liftrmeteredbilling.BatchUsageEventResponse, err error)
             UsageEvent(ctx context.Context, authorization string, parameters liftrmeteredbilling.UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result liftrmeteredbilling.SetObject, err error)
         }
 
-        var _ LiftrMarketplaceBillingClientAPI = (*liftrmeteredbilling.LiftrMarketplaceBillingClient)(nil)
+        var _ ClientAPI = (*liftrmeteredbilling.Client)(nil)

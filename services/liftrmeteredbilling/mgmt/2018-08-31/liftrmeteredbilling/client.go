@@ -1,6 +1,6 @@
 // Package liftrmeteredbilling implements the Azure ARM Liftrmeteredbilling service API version 2018-08-31.
 //
-// REST API for LiftrMarketplaceBilling.
+// REST API for LiftrMeteredBilling.
 package liftrmeteredbilling
 
 // Copyright (c) Microsoft and contributors.  All rights reserved.

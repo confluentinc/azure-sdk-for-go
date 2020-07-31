@@ -25,18 +25,18 @@ import (
     "github.com/Azure/go-autorest/tracing"
 )
 
-// LiftrMarketplaceBillingClient is the REST API for LiftrMarketplaceBilling.
-type LiftrMarketplaceBillingClient struct {
+// Client is the REST API for LiftrMeteredBilling.
+type Client struct {
     BaseClient
 }
-// NewLiftrMarketplaceBillingClient creates an instance of the LiftrMarketplaceBillingClient client.
-func NewLiftrMarketplaceBillingClient() LiftrMarketplaceBillingClient {
-    return NewLiftrMarketplaceBillingClientWithBaseURI(DefaultBaseURI, )
+// NewClient creates an instance of the Client client.
+func NewClient() Client {
+    return NewClientWithBaseURI(DefaultBaseURI, )
 }
 
-// NewLiftrMarketplaceBillingClientWithBaseURI creates an instance of the LiftrMarketplaceBillingClient client.
-    func NewLiftrMarketplaceBillingClientWithBaseURI(baseURI string, ) LiftrMarketplaceBillingClient {
-        return LiftrMarketplaceBillingClient{ NewWithBaseURI(baseURI, )}
+// NewClientWithBaseURI creates an instance of the Client client.
+    func NewClientWithBaseURI(baseURI string, ) Client {
+        return Client{ NewWithBaseURI(baseURI, )}
     }
 
 // BatchUsageEvent report batch usage events.
@@ -48,9 +48,9 @@ func NewLiftrMarketplaceBillingClient() LiftrMarketplaceBillingClient {
         // xMsCorrelationid - a unique string value for operation on the client. This parameter correlates all events
         // from client operation with events on the server side. If this value isn't provided, one will be generated
         // and provided in the response headers.
-func (client LiftrMarketplaceBillingClient) BatchUsageEvent(ctx context.Context, authorization string, parameters BatchUsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result BatchUsageEventResponse, err error) {
+func (client Client) BatchUsageEvent(ctx context.Context, authorization string, parameters BatchUsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result BatchUsageEventResponse, err error) {
     if tracing.IsEnabled() {
-        ctx = tracing.StartSpan(ctx, fqdn + "/LiftrMarketplaceBillingClient.BatchUsageEvent")
+        ctx = tracing.StartSpan(ctx, fqdn + "/Client.BatchUsageEvent")
         defer func() {
             sc := -1
             if result.Response.Response != nil {
@@ -61,27 +61,27 @@ func (client LiftrMarketplaceBillingClient) BatchUsageEvent(ctx context.Context,
     }
         req, err := client.BatchUsageEventPreparer(ctx, authorization, parameters, xMsRequestid, xMsCorrelationid)
     if err != nil {
-    err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "BatchUsageEvent", nil , "Failure preparing request")
+    err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "BatchUsageEvent", nil , "Failure preparing request")
     return
     }
 
             resp, err := client.BatchUsageEventSender(req)
             if err != nil {
             result.Response = autorest.Response{Response: resp}
-            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "BatchUsageEvent", resp, "Failure sending request")
+            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "BatchUsageEvent", resp, "Failure sending request")
             return
             }
 
             result, err = client.BatchUsageEventResponder(resp)
             if err != nil {
-            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "BatchUsageEvent", resp, "Failure responding to request")
+            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "BatchUsageEvent", resp, "Failure responding to request")
             }
 
     return
     }
 
     // BatchUsageEventPreparer prepares the BatchUsageEvent request.
-    func (client LiftrMarketplaceBillingClient) BatchUsageEventPreparer(ctx context.Context, authorization string, parameters BatchUsageEventRequest, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
+    func (client Client) BatchUsageEventPreparer(ctx context.Context, authorization string, parameters BatchUsageEventRequest, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
                     const APIVersion = "2018-08-31"
         queryParameters := map[string]interface{} {
         "api-version": APIVersion,
@@ -91,7 +91,7 @@ func (client LiftrMarketplaceBillingClient) BatchUsageEvent(ctx context.Context,
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/batchusageevent"),
+    autorest.WithPath("/batchUsageEvent"),
     autorest.WithJSON(parameters),
     autorest.WithQueryParameters(queryParameters),
     autorest.WithHeader("authorization", autorest.String(authorization)))
@@ -108,14 +108,14 @@ func (client LiftrMarketplaceBillingClient) BatchUsageEvent(ctx context.Context,
 
     // BatchUsageEventSender sends the BatchUsageEvent request. The method will close the
     // http.Response Body if it receives an error.
-    func (client LiftrMarketplaceBillingClient) BatchUsageEventSender(req *http.Request) (*http.Response, error) {
+    func (client Client) BatchUsageEventSender(req *http.Request) (*http.Response, error) {
         sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
             return autorest.SendWithSender(client, req, sd...)
             }
 
 // BatchUsageEventResponder handles the response to the BatchUsageEvent request. The method always
 // closes the http.Response Body.
-func (client LiftrMarketplaceBillingClient) BatchUsageEventResponder(resp *http.Response) (result BatchUsageEventResponse, err error) {
+func (client Client) BatchUsageEventResponder(resp *http.Response) (result BatchUsageEventResponse, err error) {
     err = autorest.Respond(
     resp,
     client.ByInspecting(),
@@ -135,9 +135,9 @@ func (client LiftrMarketplaceBillingClient) BatchUsageEventResponder(resp *http.
         // xMsCorrelationid - a unique string value for operation on the client. This parameter correlates all events
         // from client operation with events on the server side. If this value isn't provided, one will be generated
         // and provided in the response headers.
-func (client LiftrMarketplaceBillingClient) UsageEvent(ctx context.Context, authorization string, parameters UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result SetObject, err error) {
+func (client Client) UsageEvent(ctx context.Context, authorization string, parameters UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (result SetObject, err error) {
     if tracing.IsEnabled() {
-        ctx = tracing.StartSpan(ctx, fqdn + "/LiftrMarketplaceBillingClient.UsageEvent")
+        ctx = tracing.StartSpan(ctx, fqdn + "/Client.UsageEvent")
         defer func() {
             sc := -1
             if result.Response.Response != nil {
@@ -148,27 +148,27 @@ func (client LiftrMarketplaceBillingClient) UsageEvent(ctx context.Context, auth
     }
         req, err := client.UsageEventPreparer(ctx, authorization, parameters, xMsRequestid, xMsCorrelationid)
     if err != nil {
-    err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "UsageEvent", nil , "Failure preparing request")
+    err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "UsageEvent", nil , "Failure preparing request")
     return
     }
 
             resp, err := client.UsageEventSender(req)
             if err != nil {
             result.Response = autorest.Response{Response: resp}
-            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "UsageEvent", resp, "Failure sending request")
+            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "UsageEvent", resp, "Failure sending request")
             return
             }
 
             result, err = client.UsageEventResponder(resp)
             if err != nil {
-            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.LiftrMarketplaceBillingClient", "UsageEvent", resp, "Failure responding to request")
+            err = autorest.NewErrorWithError(err, "liftrmeteredbilling.Client", "UsageEvent", resp, "Failure responding to request")
             }
 
     return
     }
 
     // UsageEventPreparer prepares the UsageEvent request.
-    func (client LiftrMarketplaceBillingClient) UsageEventPreparer(ctx context.Context, authorization string, parameters UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
+    func (client Client) UsageEventPreparer(ctx context.Context, authorization string, parameters UsageEventRequest, xMsRequestid string, xMsCorrelationid string) (*http.Request, error) {
                     const APIVersion = "2018-08-31"
         queryParameters := map[string]interface{} {
         "api-version": APIVersion,
@@ -178,7 +178,7 @@ func (client LiftrMarketplaceBillingClient) UsageEvent(ctx context.Context, auth
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/usageevent"),
+    autorest.WithPath("/usageEvent"),
     autorest.WithJSON(parameters),
     autorest.WithQueryParameters(queryParameters),
     autorest.WithHeader("authorization", autorest.String(authorization)))
@@ -195,14 +195,14 @@ func (client LiftrMarketplaceBillingClient) UsageEvent(ctx context.Context, auth
 
     // UsageEventSender sends the UsageEvent request. The method will close the
     // http.Response Body if it receives an error.
-    func (client LiftrMarketplaceBillingClient) UsageEventSender(req *http.Request) (*http.Response, error) {
+    func (client Client) UsageEventSender(req *http.Request) (*http.Response, error) {
         sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
             return autorest.SendWithSender(client, req, sd...)
             }
 
 // UsageEventResponder handles the response to the UsageEvent request. The method always
 // closes the http.Response Body.
-func (client LiftrMarketplaceBillingClient) UsageEventResponder(resp *http.Response) (result SetObject, err error) {
+func (client Client) UsageEventResponder(resp *http.Response) (result SetObject, err error) {
     err = autorest.Respond(
     resp,
     client.ByInspecting(),
