@@ -91,7 +91,7 @@ func (client Client) BatchUsageEvent(ctx context.Context, authorization string, 
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/batchUsageEvent"),
+    autorest.WithPath("/batchusageevent"),
     autorest.WithJSON(parameters),
     autorest.WithQueryParameters(queryParameters),
     autorest.WithHeader("authorization", autorest.String(authorization)))
@@ -178,7 +178,7 @@ func (client Client) UsageEvent(ctx context.Context, authorization string, param
     autorest.AsContentType("application/json; charset=utf-8"),
     autorest.AsPost(),
     autorest.WithBaseURL(client.BaseURI),
-    autorest.WithPath("/usageEvent"),
+    autorest.WithPath("/usageevent"),
     autorest.WithJSON(parameters),
     autorest.WithQueryParameters(queryParameters),
     autorest.WithHeader("authorization", autorest.String(authorization)))
