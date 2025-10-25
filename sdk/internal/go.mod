@@ -3,7 +3,7 @@ module github.com/Azure/azure-sdk-for-go/sdk/internal
 go 1.18
 
 require (
-	github.com/dnaeon/go-vcr v1.2.0
+	github.com/dnaeon/go-vcr/v4 v4.0.5
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/net v0.20.0
 	golang.org/x/text v0.14.0
