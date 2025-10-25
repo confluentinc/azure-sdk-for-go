@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/Azure/azure-sdk-for-go v68.0.0+incompatible
-	github.com/Azure/go-autorest/autorest v0.11.18
+	github.com/Azure/go-autorest/autorest v0.11.30
 	github.com/Masterminds/semver v1.5.0
 )
 
