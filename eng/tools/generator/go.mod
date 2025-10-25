@@ -1,11 +1,11 @@
 module github.com/Azure/azure-sdk-for-go/eng/tools/generator
 
-go 1.20
+go 1.23
 
 require (
 	github.com/Azure/azure-sdk-for-go/eng/tools/internal v0.0.0-20240221072118-775ba01d28c5
 	github.com/Masterminds/semver v1.5.0
-	github.com/ahmetb/go-linq/v3 v3.2.0
+	github.com/ahmetb/go-linq/v4 v4.0.0
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/google/go-github/v53 v53.2.0
 	github.com/spf13/cobra v1.8.0

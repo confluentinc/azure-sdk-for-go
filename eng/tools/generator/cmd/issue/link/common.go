@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/eng/tools/generator/cmd/issue/query"
-	"github.com/ahmetb/go-linq/v3"
+	"github.com/ahmetb/go-linq/v4"
 )
 
 func init() {

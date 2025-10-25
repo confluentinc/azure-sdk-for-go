@@ -9,7 +9,7 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/eng/tools/generator/autorest"
 	"github.com/Azure/azure-sdk-for-go/eng/tools/generator/config"
-	"github.com/ahmetb/go-linq/v3"
+	"github.com/ahmetb/go-linq/v4"
 )
 
 type GenerateResult struct {

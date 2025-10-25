@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ahmetb/go-linq/v3"
+	"github.com/ahmetb/go-linq/v4"
 )
 
 func GetReleaseResult(packages []GenerateResult) []string {

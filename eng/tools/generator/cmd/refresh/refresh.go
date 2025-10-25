@@ -19,7 +19,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/eng/tools/generator/repo"
 	"github.com/Azure/azure-sdk-for-go/eng/tools/internal/exports"
 	sdkutils "github.com/Azure/azure-sdk-for-go/eng/tools/internal/utils"
-	"github.com/ahmetb/go-linq/v3"
+	"github.com/ahmetb/go-linq/v4"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"

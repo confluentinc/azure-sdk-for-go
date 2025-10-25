@@ -15,7 +15,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/eng/tools/internal/markdown"
 	"github.com/Azure/azure-sdk-for-go/eng/tools/internal/report"
 	"github.com/Azure/azure-sdk-for-go/eng/tools/internal/utils"
-	"github.com/ahmetb/go-linq/v3"
+	"github.com/ahmetb/go-linq/v4"
 )
 
 const (
