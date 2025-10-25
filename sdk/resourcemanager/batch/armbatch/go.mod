@@ -8,7 +8,7 @@ require (
 	github.com/Azure/azure-sdk-for-go/sdk/internal v1.5.2
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/batch/armbatch v1.2.1
 	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/internal/v2 v2.0.0
-	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources v1.1.1
+	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources v3.0.0
 	github.com/stretchr/testify v1.8.4
 )
 
