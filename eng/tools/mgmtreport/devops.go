@@ -9,10 +9,10 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6/build"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6/pipelines"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6/test"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7/build"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7/pipelines"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7/test"
 )
 
 // Since azuredevops module has some issue of fetching code coverage (https://github.com/microsoft/azure-devops-go-api/issues/124), we need to do that by ourselves.

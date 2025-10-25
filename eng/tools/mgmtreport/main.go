@@ -22,9 +22,9 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6/build"
-	"github.com/microsoft/azure-devops-go-api/azuredevops/v6/pipelines"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7/build"
+	"github.com/microsoft/azure-devops-go-api/azuredevops/v7/pipelines"
 )
 
 var (
